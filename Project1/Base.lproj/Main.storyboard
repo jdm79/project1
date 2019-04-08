@@ -66,12 +66,12 @@
         <!--Detail View Controller-->
         <scene sceneID="7gV-F1-fse">
             <objects>
-                <viewController storyboardIdentifier="Detail" id="sDy-hA-z1f" customClass="DetailViewController" customModule="Project1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="sDy-hA-z1f" customClass="DetailViewController" customModule="Project1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rpk-q0-5Up">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eix-S2-jt3">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nssl0033.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Eix-S2-jt3">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
@@ -111,4 +111,7 @@
             <point key="canvasLocation" x="53.623188405797109" y="665.625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nssl0033.jpg" width="1024" height="768"/>
+    </resources>
 </document>

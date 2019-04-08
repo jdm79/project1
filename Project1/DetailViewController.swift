@@ -9,17 +9,17 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    @IBOutlet var imageView: UIImageView!
-    var selectedImage: String?
+    
+    var selectedPicture: String!
+    var pictureTitle: String!
+    
+    @IBOutlet private var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = selectedImage
         navigationItem.largeTitleDisplayMode = .never
-
-        
-        if let imageToLoad = selectedImage {
+        if let imageToLoad = selectedPicture {
+            title = pictureTitle
             imageView.image = UIImage(named: imageToLoad)
         }
     }
@@ -34,3 +34,4 @@ class DetailViewController: UIViewController {
         navigationController?.hidesBarsOnTap = false
     }
 }
+

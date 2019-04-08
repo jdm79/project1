@@ -10,42 +10,57 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    var pictures = [String]()
+    var pictures: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+        loadItems()
+    }
+    
+    private func loadItems() {
         let fm = FileManager.default
-        let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
+        guard let path = Bundle.main.resourcePath else {
+            fatalError("Unable to locate resourcePath")
+        }
         
-        for item in items {
-            if item.hasPrefix("nssl") {
-                pictures.append(item)
+        do {
+            let items = try fm.contentsOfDirectory(atPath: path)
+            for item in items {
+                if item.hasPrefix("nssl") {
+                    pictures.append(item)
+                }
             }
+            pictures = pictures.sorted { $0 < $1 }
+        } catch let error {
+            print("Unable to get items from directory: \(error)")
         }
     }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        pictures.sort()
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
+        let picture = pictures[indexPath.row]
+        cell.textLabel?.text = picture
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail")
-            as? DetailViewController {
-            vc.selectedImage = pictures[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            fatalError("Unable to instantiate DetailViewController")
         }
+        
+        let selectedPicture = pictures[indexPath.row]
+        if let indexOfPicture = pictures.firstIndex(of: selectedPicture) {
+            let pictureTitle = "Picture \(indexOfPicture + 1) of \(pictures.count)"
+            vc.pictureTitle = pictureTitle
+        }
+        vc.selectedPicture = pictures[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }
