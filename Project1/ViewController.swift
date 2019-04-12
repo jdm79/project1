@@ -58,6 +58,8 @@ class ViewController: UITableViewController {
         if let indexOfPicture = pictures.firstIndex(of: selectedPicture) {
             let pictureTitle = "Picture \(indexOfPicture + 1) of \(pictures.count)"
             vc.pictureTitle = pictureTitle
+            print(indexOfPicture)
+
         }
         vc.selectedPicture = pictures[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
