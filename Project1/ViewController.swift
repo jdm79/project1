@@ -11,10 +11,11 @@ import UIKit
 class ViewController: UITableViewController {
     
     var pictures: [String] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAppTapped))
         loadItems()
     }
     
@@ -41,7 +42,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         let picture = pictures[indexPath.row]
@@ -59,11 +60,18 @@ class ViewController: UITableViewController {
             let pictureTitle = "Picture \(indexOfPicture + 1) of \(pictures.count)"
             vc.pictureTitle = pictureTitle
             print(indexOfPicture)
-
+            
         }
         vc.selectedPicture = pictures[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
+    @objc func shareAppTapped() {
+        
+        let sa = UIActivityViewController(activityItems: ["Check out this app! https://github.com/jdm79/project1"], applicationActivities: [])
+        sa.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(sa, animated: true)
+    }
+    
 }
 
